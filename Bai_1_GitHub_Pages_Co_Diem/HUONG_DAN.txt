@@ -1,0 +1,6 @@
+CÁCH ĐƯA BÀI 1 LÊN GITHUB PAGES
+1. Giải nén file ZIP.
+2. Kéo nguyên thư mục bai-1 lên repository baigianghoahoc.
+3. GitHub phải hiển thị: bai-1/index.html
+4. Link Bài 1: https://gvsangtao.github.io/baigianghoahoc/bai-1/
+Lưu ý: không đổi tên index.html bên trong thư mục bai-1.
