@@ -84,11 +84,39 @@ if(q.type==="mcq")h+=q.options.map(o=>`<div class="opt ${a[q.n]===o.key?'sel':''
 if(q.type==="tf")h+=q.statements.map(s=>`<div class="tf"><div><b>${s.key})</b> ${esc(s.text)}</div><div><button class="${a[q.n]?.[s.key]===true?'sel':''}" ${a[q.n]?.[s.key]!==undefined?'disabled':''} onclick="stf(${q.n},'${s.key}',true)">Đúng</button> <button class="${a[q.n]?.[s.key]===false?'sel':''}" ${a[q.n]?.[s.key]!==undefined?'disabled':''} onclick="stf(${q.n},'${s.key}',false)">Sai</button></div></div>`).join("");
 if(q.type==="short")h+=`<input class="short" value="${esc(a[q.n]??'')}" ${locked[q.n]?'disabled':''} oninput="if(!locked[${q.n}])a[${q.n}]=this.value" placeholder="Nhập câu trả lời">`;
 h+=`<div id="fb" class="fb"></div>`;card.innerHTML=h;if(q.n in ck)fb(q,ck[q.n])}
-function chooseMC(n,k){if(locked[n])return;a[n]=k;locked[n]=true;rq()}
-function stf(n,k,v){a[n]=a[n]||{};if(a[n][k]!==undefined)return;a[n][k]=v;rq()}
+function chooseMC(n,k){
+  if(locked[n]) return;
+  a[n]=k;
+  rq();
+}
+function stf(n,k,v){
+  if(locked[n]) return;
+  a[n]=a[n]||{};
+  a[n][k]=v;
+  rq();
+}
 function norm(s){return String(s??"").trim().toLowerCase().replace(",",".").replace(/\s+/g," ")}
 function good(q){if(q.type==="mcq")return a[q.n]===q.answer;if(q.type==="short")return norm(a[q.n])===norm(q.answer);return q.statements.every(s=>a[q.n]&&a[q.n][s.key]===q.answer[s.key])}
-function check(){let q=qs[qi];if(q.n in ck){fb(q,ck[q.n]);return}if(q.type==="short")locked[q.n]=true;let v=good(q);ck[q.n]=v;fb(q,v);rn();summary();rq()}
+function check(){
+  let q=qs[qi];
+  if(locked[q.n]){
+    fb(q,ck[q.n]);
+    return;
+  }
+  if(q.type==="mcq"&&!a[q.n]) return;
+  if(q.type==="tf"&&!q.statements.every(st=>a[q.n]&&a[q.n][st.key]!==undefined)) return;
+  if(q.type==="short"&&!norm(a[q.n])) return;
+
+  let v=good(q);
+  ck[q.n]=v;
+  locked[q.n]=true;
+
+  fb(q,v);
+  rn();
+  summary();
+  rq();
+  fb(q,v);
+}
 function fb(q,v){let f=$("fb");f.className="fb "+(v?"ok":"no");let ans=q.type==="tf"?Object.entries(q.answer).map(([k,x])=>k+") "+(x?"Đúng":"Sai")).join("; "):esc(q.answer);f.innerHTML=`<b>${v?"Chính xác!":"Chưa chính xác."}</b><br>Đáp án: ${ans}${q.explain?`<br>${esc(q.explain)}`:""}`}
 function prevQ(){qi=Math.max(0,qi-1);rq();scrollTo(0,document.getElementById('quiz').offsetTop)}function nextQ(){qi=Math.min(qs.length-1,qi+1);rq();scrollTo(0,document.getElementById('quiz').offsetTop)}
 function updateScore(){
