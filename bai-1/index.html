@@ -20,6 +20,14 @@ body.slide-view-open #slide-view-tools{display:flex}
 #slide-view-tools .close-slide-view{background:#8655b0;color:#fff;border-color:#8655b0}
 #slide-view-count{white-space:nowrap}
 @media(max-width:500px){#slide-view-tools{gap:7px;font-size:13px}#slide-view-tools button{padding:9px 10px}body.slide-view-open #stage{padding:6px 4px calc(76px + env(safe-area-inset-bottom))!important}}
+
+/* V3: mobile quiz layout only; keep desktop and quiz logic untouched. */
+@media (max-width:780px){
+  #sideQ,#sideQ.open,.side-q,.side-q.open{display:none!important;}
+  #quiz .quiz-actions{position:static!important;bottom:auto!important;z-index:auto!important;background:transparent!important;padding:10px 0 16px!important;margin:8px 0 0!important;}
+  #quiz .quiz-actions .btn{min-height:44px;flex:1 1 0;padding:10px 6px;font-size:clamp(12px,3.3vw,16px);white-space:normal;}
+  #quiz .card{min-height:0;}
+}
 </style></head><body><div class="app"><aside><div class="brand">HÓA HỌC 11</div><div class="sub">Không gian bài học tương tác</div><nav>
 <button data-p="home">⌂ Trang chủ</button><button class="on" data-p="slides">▣ Không gian bài học</button><button data-p="keys">◇ Hệ thống từ khóa</button><button data-p="quiz">✓ Không gian luyện tập</button><div id="sideQ" class="side-q"></div>
 </nav><footer>Cô Thảo with 🩷 thiết kế bởi AI</footer></aside><div class="main"><div class="top"><strong>BÀI 1 · CÂN BẰNG HÓA HỌC</strong><b id="tc">Slide 1/15</b></div>
