@@ -19,6 +19,13 @@ main{margin-left:280px}.top{height:70px;background:#fff;display:flex;align-items
 #slideViewer .viewerCount{font:700 15px Arial,sans-serif;text-align:center}
 body.slide-viewer-open{overflow:hidden}
 @media(max-width:760px){#slideViewer button{font-size:14px;padding:12px 13px}#slideViewer .viewerTop,#slideViewer .viewerBottom{padding:8px 0}#slideViewer .viewerImageWrap{width:100%}}
+
+/* Chỉ căn chỉnh lưới số câu Bài 7, không thay đổi dữ liệu hoặc logic */
+.side-q{min-width:0;overflow-x:hidden}
+.side-q-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;width:100%;min-width:0}
+.side-q-grid button{display:flex;align-items:center;justify-content:center;width:100%;min-width:0;height:38px;padding:0;margin:0;box-sizing:border-box;text-align:center;line-height:1;font-size:15px;white-space:nowrap;overflow:hidden}
+@media(max-width:760px){.side-q-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:430px){.side-q-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 </style><style>
 .back{background:linear-gradient(135deg,#542477,#7b3fb2)!important;color:#fff!important}
 </style></head><body>
